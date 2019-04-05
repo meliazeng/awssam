@@ -17,3 +17,4 @@ artifacts:
   type: zip
   files:
     - SamDeploymentTemplate.yaml
+    - index.html
