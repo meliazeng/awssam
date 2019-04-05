@@ -10,7 +10,7 @@
     "axios": "^0.18.0"
   },
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production hello-world/app.js",
     "test": "mocha hello-world/tests/unit/"
   },
   "devDependencies": {
