@@ -12,7 +12,7 @@ phases:
   post_build:
     commands:
       # env var BUILD_ARTIFACT_BUCKET is defined in ci.yaml
-      - aws cloudformation package --template-file testApplication/template.yaml --s3-bucket jamesbuck3 --output-template-file SamDeploymentTemplate.yaml
+      - aws cloudformation package --template-file template.yaml --s3-bucket jamesbuck3 --output-template-file SamDeploymentTemplate.yaml
 artifacts:
   type: zip
   files:
