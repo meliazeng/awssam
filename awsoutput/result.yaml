@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'testApplication
+
+  Sample SAM Template for testApplication
+
+  '
+Parameters:
+  SubnetId:
+    Type: String
+    Default: subnet-3dc27a16
+  SecurityGroupId:
+    Type: String
+    Default: sg-024d646d26d7bdbba
+Globals:
+  Function:
+    Runtime: nodejs8.10
+    Timeout: 3
+    VpcConfig:
+      SubnetIds:
+      - Ref: SubnetId
+      SecurityGroupIds:
+      - Ref: SecurityGroupId
+    Environment:
+      Variables:
+        IP_NEO4J: 192.168.9.40
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://jamesbuck3/dd5a5c5d002799be8013d333d44653ba
+      Handler: app.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+      - VPCAccessPolicy: {}
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+  HelloWorldFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
+  HelloWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunctionRole
+      - Arn
