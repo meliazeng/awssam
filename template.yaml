@@ -19,11 +19,6 @@ Globals:
   Function:
     Runtime: nodejs8.10
     Timeout: 3
-    VpcConfig:
-      SubnetIds:
-        - !Ref SubnetId
-      SecurityGroupIds:
-        - !Ref SecurityGroupId
     Environment:
       Variables: 
         IP_NEO4J: 192.168.9.40  
@@ -35,8 +30,6 @@ Resources:
       CodeUri: hello-world/
       Handler: app.lambdaHandler
       Runtime: nodejs8.10
-      Policies:
-        - VPCAccessPolicy: {}
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
